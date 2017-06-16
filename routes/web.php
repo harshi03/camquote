@@ -14,3 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::any('adminer', '\Miroc\LaravelAdminer\AdminerAutologinController@index');
+
+
+Route::get('/testDatabase', function() {
+    App\User::create([
+        'email' => uniqid() . '@example.com',
+        'name' => 'Test User',
+        'password' => 'secret'
+    ]);
+
+    return response()->json(App\User::all());
+});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
